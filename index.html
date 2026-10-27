@@ -49,14 +49,14 @@ label{display:block;font-size:13px;color:var(--mu);margin:10px 0 3px}
 
 .hero{position:relative;height:190px;overflow:hidden;background:linear-gradient(180deg,var(--sky1),var(--sky2));border-radius:0 0 26px 26px;box-shadow:0 6px 18px #0003}
 @media(min-width:900px){.hero{height:240px}}
-.hero svg{position:absolute;inset:0;width:100%;height:100%}
+.hero svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .stars{opacity:var(--stars)}
 .hero .ttl{position:absolute;left:0;right:0;top:0;padding:calc(14px + env(safe-area-inset-top)) 18px 0;color:#fff;text-shadow:0 2px 6px #0007;max-width:720px;margin:0 auto}
 .hero .ttl h1{margin:0;font-size:28px;letter-spacing:.5px}
 .hero .ttl p{margin:2px 0 0;font-size:14px;opacity:.95}
 .hero .info{position:absolute;left:0;right:0;bottom:12px;max-width:720px;margin:0 auto;padding:0 14px}
 .hero .info span{display:inline-block;background:#0007;backdrop-filter:blur(4px);color:#fff;border-radius:999px;padding:6px 14px;font-size:14px}
-.cloud{animation:drift 60s linear infinite}
+.cloud{animation:drift 60s linear infinite alternate}
 @keyframes drift{from{transform:translateX(-40px)}to{transform:translateX(60px)}}
 
 .card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:12px;margin-bottom:12px;box-shadow:0 2px 8px #0000000d}
@@ -142,47 +142,7 @@ dialog::backdrop{background:#0008}
 </head>
 <body>
 <header class="hero">
-  <svg viewBox="-1600 0 4000 190" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-    <defs>
-      <g id="stg" fill="#fff">
-        <circle cx="60" cy="30" r="1.5"/><circle cx="140" cy="60" r="1"/><circle cx="230" cy="22" r="1.4"/><circle cx="330" cy="48" r="1"/>
-        <circle cx="430" cy="25" r="1.5"/><circle cx="520" cy="62" r="1"/><circle cx="610" cy="30" r="1.3"/><circle cx="700" cy="55" r="1"/><circle cx="760" cy="20" r="1.4"/>
-      </g>
-      <g id="mtg">
-        <path d="M0 190V120L90 60L150 105L230 40L320 115L400 70L500 125L590 55L680 110L760 75L800 100V190Z" fill="var(--m1)"/>
-        <path d="M230 40L205 62L222 58L232 68L245 57L258 63Z" fill="var(--snow)"/>
-        <path d="M590 55L568 74L584 70L592 80L606 69L618 76Z" fill="var(--snow)"/>
-        <path d="M90 60L72 76L86 73L92 82L104 72Z" fill="var(--snow)"/>
-        <path d="M0 190V150L70 105L140 145L210 95L290 150L380 100L470 155L560 110L650 155L730 115L800 150V190Z" fill="var(--m2)"/>
-        <path d="M210 95L192 111L206 108L212 117L224 107Z" fill="var(--snow)" opacity=".9"/>
-        <path d="M380 100L362 115L376 112L382 121L394 111Z" fill="var(--snow)" opacity=".9"/>
-        <path d="M0 190V165L60 140L120 170L200 135L280 175L370 150L460 180L550 145L640 178L720 150L800 172V190Z" fill="var(--m3)"/>
-        <g fill="var(--m3)"><path d="M30 190l12-34 12 34zM52 190l10-28 10 28zM740 190l12-36 12 36zM762 190l10-26 10 26z"/></g>
-      </g>
-    </defs>
-
-    <g class="stars">
-      <use href="#stg" transform="translate(-1600 0)"/>
-      <use href="#stg" transform="scale(-1 1)"/>
-      <use href="#stg"/>
-      <use href="#stg" transform="translate(1600 0) scale(-1 1)"/>
-      <use href="#stg" transform="translate(1600 0)"/>
-    </g>
-
-    <circle cx="640" cy="62" r="26" fill="var(--sun)" opacity=".95"/>
-
-    <g class="cloud" fill="#fff" opacity=".55"><ellipse cx="200" cy="50" rx="46" ry="9"/><ellipse cx="228" cy="43" rx="28" ry="8"/></g>
-    <g class="cloud" fill="#fff" opacity=".4" style="animation-duration:90s"><ellipse cx="480" cy="85" rx="50" ry="8"/><ellipse cx="506" cy="78" rx="26" ry="7"/></g>
-    <g class="cloud" fill="#fff" opacity=".5" style="animation-duration:75s"><ellipse cx="-250" cy="45" rx="48" ry="9"/><ellipse cx="-222" cy="38" rx="28" ry="8"/></g>
-    <g class="cloud" fill="#fff" opacity=".4" style="animation-duration:100s"><ellipse cx="1050" cy="60" rx="50" ry="8"/><ellipse cx="1076" cy="53" rx="26" ry="7"/></g>
-    <g class="cloud" fill="#fff" opacity=".45" style="animation-duration:85s"><ellipse cx="-600" cy="80" rx="46" ry="8"/><ellipse cx="-574" cy="73" rx="26" ry="7"/></g>
-
-    <use href="#mtg" transform="translate(-1600 0)"/>
-    <use href="#mtg" transform="scale(-1 1)"/>
-    <use href="#mtg"/>
-    <use href="#mtg" transform="translate(1600 0) scale(-1 1)"/>
-    <use href="#mtg" transform="translate(1600 0)"/>
-  </svg>
+  <svg id="heroSvg" viewBox="0 0 400 190" preserveAspectRatio="xMinYMin slice" aria-hidden="true"></svg>
   <div class="ttl"><h1>⛰️ Plecak</h1><p>Lekko na szlak</p></div>
   <div class="info"><span id="heroInfo"></span></div>
 </header>
@@ -372,6 +332,76 @@ function applyTheme(){
   const m=document.querySelector('meta[name=theme-color]');if(m)m.content=THEMES[S.theme].bar;
 }
 function setTheme(t){if(!THEMES[t])return;S.theme=t;save();applyTheme();renderSet()}
+
+/* ---------- nagłówek: góry rysowane na dokładną szerokość ekranu ---------- */
+function rnd(seed){let s=seed;return()=>{s=s*16807%2147483647;return s/2147483647}}
+function ridge(W,base,amp,stepMin,stepMax,seed){
+  const r=rnd(seed),pts=[];
+  let x=-20,peak=r()>.5;
+  while(x<W+stepMax){
+    const y=peak?base-amp*(.55+.45*r()):base-amp*.3*r();
+    pts.push({x,y,peak});
+    x+=stepMin+(stepMax-stepMin)*r();
+    peak=!peak;
+  }
+  return pts;
+}
+function ridgePath(pts,H){
+  const f=n=>n.toFixed(1);
+  return 'M'+f(pts[0].x)+' '+H+pts.map(p=>' L'+f(p.x)+' '+f(p.y)).join('')+' L'+f(pts[pts.length-1].x)+' '+H+'Z';
+}
+function snowCaps(pts,fill,op){
+  const f=n=>n.toFixed(1);let d='';
+  for(let i=1;i<pts.length-1;i++){
+    const p=pts[i];if(!p.peak)continue;
+    const a=pts[i-1],b=pts[i+1],ha=a.y-p.y,hb=b.y-p.y;
+    if(ha<=0||hb<=0)continue;
+    const dh=Math.min(22,ha*.4,hb*.4);if(dh<8)continue;
+    const lx=p.x-(p.x-a.x)*dh/ha,rx=p.x+(b.x-p.x)*dh/hb,y=p.y+dh;
+    d+='M'+f(p.x)+' '+f(p.y)+'L'+f(lx)+' '+f(y)
+      +'L'+f(p.x-(p.x-lx)*.4)+' '+f(p.y+dh*.7)
+      +'L'+f(p.x)+' '+f(y+dh*.3)
+      +'L'+f(p.x+(rx-p.x)*.4)+' '+f(p.y+dh*.7)
+      +'L'+f(rx)+' '+f(y)+'Z';
+  }
+  return d?`<path d="${d}" fill="${fill}" opacity="${op}"/>`:'';
+}
+function pineTrees(W,H,seed){
+  const r=rnd(seed),f=n=>n.toFixed(1);let d='',x=8+r()*50;
+  while(x<W){
+    const n=1+Math.floor(r()*3);
+    for(let k=0;k<n;k++){
+      const px=x+k*(9+r()*6),h=20+r()*22,w=h*.38;
+      d+='M'+f(px-w)+' '+H+'L'+f(px)+' '+f(H-h)+'L'+f(px+w)+' '+H+'Z';
+    }
+    x+=90+r()*260;
+  }
+  return `<path d="${d}" fill="var(--m3)"/>`;
+}
+function cloudSvg(x,y,s,op,dur){
+  const f=n=>n.toFixed(1);
+  return `<g class="cloud" fill="#fff" opacity="${op}" style="animation-duration:${dur}s"><ellipse cx="${f(x)}" cy="${f(y)}" rx="${f(46*s)}" ry="${f(9*s)}"/><ellipse cx="${f(x+28*s)}" cy="${f(y-7*s)}" rx="${f(28*s)}" ry="${f(8*s)}"/></g>`;
+}
+function drawHero(){
+  const el=$('#heroSvg');if(!el)return;
+  const box=el.parentElement,cw=box.clientWidth,ch=box.clientHeight;
+  if(!cw||!ch)return;
+  const H=190,W=Math.max(200,Math.round(cw*H/ch));
+  el.setAttribute('viewBox','0 0 '+W+' '+H);
+  const r=rnd(99);let stars='';
+  for(let i=0,n=Math.round(W/22);i<n;i++)stars+=`<circle cx="${(r()*W).toFixed(0)}" cy="${(4+r()*66).toFixed(0)}" r="${(.8+r()*.9).toFixed(1)}"/>`;
+  const m1=ridge(W,128,66,70,130,7),m2=ridge(W,154,50,55,105,21),m3=ridge(W,176,26,45,85,33);
+  el.innerHTML=
+    `<g class="stars" fill="#fff">${stars}</g>`+
+    `<circle cx="${(W*.78).toFixed(0)}" cy="46" r="23" fill="var(--sun)" opacity=".95"/>`+
+    cloudSvg(W*.30,32,1,.5,60)+cloudSvg(W*.56,74,1.1,.4,90)+cloudSvg(W*.93,30,.9,.45,75)+cloudSvg(W*.10,82,.8,.35,100)+
+    `<path d="${ridgePath(m1,H)}" fill="var(--m1)"/>`+snowCaps(m1,'var(--snow)',1)+
+    `<path d="${ridgePath(m2,H)}" fill="var(--m2)"/>`+snowCaps(m2,'var(--snow)',.9)+
+    `<path d="${ridgePath(m3,H)}" fill="var(--m3)"/>`+
+    pineTrees(W,H,5);
+}
+let heroT;
+window.addEventListener('resize',()=>{clearTimeout(heroT);heroT=setTimeout(drawHero,150)});
 
 /* ---------- odznaki ---------- */
 let toastT;
@@ -703,6 +733,7 @@ function resetAll(){if(!confirm('Na pewno usunąć WSZYSTKIE dane?'))return;loca
 if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js');
 applyTheme();
 render();
+drawHero();
 </script>
 </body>
 </html>
