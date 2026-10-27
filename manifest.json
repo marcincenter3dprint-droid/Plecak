@@ -1,0 +1,20 @@
+{
+  "name": "Plecak – lista wagi",
+  "short_name": "Plecak",
+  "description": "Listy wagi sprzętu na szlak, szafa ze sprzętem i mapa odwiedzonych miejsc.",
+  "lang": "pl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#eef2ea",
+  "theme_color": "#1f5f45",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
