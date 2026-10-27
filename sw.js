@@ -1,4 +1,4 @@
-const CACHE = 'plecak-cache-v3';
+const CACHE = 'plecak-cache-v4';
 const TILES = 'plecak-tiles-v1';
 const MAX_TILES = 400;
 const CORE = [
